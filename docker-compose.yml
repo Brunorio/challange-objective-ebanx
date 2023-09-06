@@ -5,7 +5,7 @@ services:
     container_name: php
     build: ./php
     volumes:
-      - ./app:/app
+      - ./src:/app
     environment:
       MYSQL_TYPE: "$MYSQL_TYPE"
       MYSQL_HOST: "$MYSQL_HOST"
