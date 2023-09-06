@@ -12,8 +12,8 @@ RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql mbstring
 RUN curl -sS https://getcomposer.org/installer | php; \
 mv composer.phar /usr/local/bin/composer;
 
-COPY initlaravel.sh /initlaravel.sh
+COPY init.sh /init.sh
 
-RUN chmod +x /initlaravel.sh
+RUN chmod +x /init.sh
 
-CMD ["/initlaravel.sh"];
+CMD ["/init.sh"];

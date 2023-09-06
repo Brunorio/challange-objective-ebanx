@@ -7,7 +7,6 @@ services:
     volumes:
       - ./src:/app
     environment:
-      MYSQL_TYPE: "$MYSQL_TYPE"
       MYSQL_HOST: "$MYSQL_HOST"
       MYSQL_DBNAME: "$MYSQL_DBNAME"
       MYSQL_USER: "$MYSQL_USER"
@@ -20,18 +19,16 @@ services:
 
   database:
     container_name: database
-    image: mariadb:10.10
+    build: 
+      context: ./database
+      args:
+        MYSQL_DBNAME: "$MYSQL_DBNAME"
     restart: unless-stopped
-    volumes:
-      - ./database/container:/var/lib/mysql
-      - ./database:/database
     ports:
       - ${MYSQL_PORT}:3306
     environment:
       MYSQL_ROOT_PASSWORD: "$MYSQL_ROOT_PASSWORD"
-    command: --default-authentication-plugin=mysql_native_password --group_concat_max_len=4294967295 --sql_mode="STRICT_TRANS_TABLES" --default_time_zone=-03:00 --event_scheduler="on" --max_allowed_packet=1073741824
     networks:
       - appnetwork
-
 networks:
   appnetwork:
