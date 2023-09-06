@@ -23,6 +23,7 @@
     "autoload": {
         "psr-4": {
             "": "domain/entity",
+            "Service\\": "domain/service",
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
