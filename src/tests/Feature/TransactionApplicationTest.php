@@ -17,9 +17,8 @@ class TransactionApplicationTest extends TestCase {
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
 
     $input = new \Input\TransactionPayment(1, 300, 'P');
-    $account = $app->pay($input);
-    $this->assertEquals($account->getBalance(), 200);
-
+    $output = $app->pay($input);
+    $this->assertEquals($output->balance, 200);
     
     $accountFounded = $accountRepository->find(1);
     $this->assertEquals($accountFounded->getBalance(), 200);

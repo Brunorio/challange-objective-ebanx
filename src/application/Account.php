@@ -7,28 +7,23 @@ class Account {
     private \Repository\Account $repository
   ) { }
 
-  public function create(\Input\Account $input) {
-    $account = new \Account($input->conta_id, 500);
+  public function find(\Input\Account $input): \Output\Account {
+    $account =  $this->repository->find($input->accountId);
+    return new \Output\Account($account->getId(), $account->getBalance());
+  }
+
+  public function create(\Input\Account $input): \Output\Account {
+    $account = new \Account($input->accountId, 500);
     $this->repository->create($account);
 
-    return $account;
+    return new \Output\Account($account->getId(), $account->getBalance());
   }
 
-  public function find(\Input\Account $input) {
-    try {
-      return $this->repository->find($input->conta_id);
-    } catch(\Exception $error) {
-      return false;
-    }
-  }
 
-  public function increaseBalance(\Input\IncreaseAccount $input): bool | \Account {
-    $account = $this->find(new \Input\Account($input->conta_id));
-    if($account !== false) {
-      $account->increaseBalance($input->valor);
-      $this->repository->update($account);
-      return $account;
-    }
-    return false;
+  public function increaseBalance(\Input\IncreaseAccount $input): \Output\Account {
+    $account = $this->repository->find($input->accountId);
+    $account->increaseBalance($input->value);
+    $this->repository->update($account);
+    return new \Output\Account($account->getId(), $account->getBalance());
   }
 }

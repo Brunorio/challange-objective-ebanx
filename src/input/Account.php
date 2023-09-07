@@ -4,7 +4,7 @@ namespace Input;
 
 class Account {
   public function __construct(
-    public int $conta_id,
-    public float $valor = 0
+    public int $accountId,
+    public float $value = 0
   ){ }
 }

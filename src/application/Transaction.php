@@ -8,12 +8,12 @@ class Transaction {
     private \Repository\Account $accountRepository
   ) { }
 
-  function pay(\Input\TransactionPayment $input): \Account {
+  function pay(\Input\TransactionPayment $input): \Output\Account {
     $account = $this->accountRepository->find($input->accountId);
     $paymentMethod = $this->paymentMethodRepository->find($input->paymentMethodId);
     \Service\Transaction::pay($account, $input->value, $paymentMethod);
     $this->accountRepository->update($account);
-    return $account;
+    return new \Output\Account($account->getId(), $account->getBalance());
   }
 
   function transfer(\Input\Transfer $input) {

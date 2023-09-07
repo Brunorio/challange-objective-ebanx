@@ -27,6 +27,7 @@
             "Service\\": "service",
             "Application\\": "application",
             "Input\\": "input",
+            "Output\\": "output",
             "Repository\\Interface\\": "domain/repository/interface",
             "Repository\\": "infrastructure/repository",
             "App\\": "app/",
