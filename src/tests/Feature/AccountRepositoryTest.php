@@ -7,24 +7,28 @@ class AccountRepositoryTest extends TestCase {
   use RefreshDatabase;
   public function testShouldCreateAccount(){
     $accountRepository = new \Repository\Account();
-    $id = \App\Models\Account::max('id') + 1;
-
-
-    $id = \App\Models\Account::max('id') + 1;
-    $account = new \Account($id, 100);
+    $account = new \Account(1, 100);
     $accountRepository->create($account);
 
-    $accountModel = \App\Models\Account::find($id);
+    $accountModel = \App\Models\Account::find(1);
     $this->assertEquals($accountModel->id, $account->getId());
     $this->assertEquals($accountModel->balance, $account->getBalance());
   }
 
+  public function testShouldThrowExceptionWhenCreateRepetedAccountId(){
+    $accountRepository = new \Repository\Account();
+    $account = new \Account(1, 100);
+    $accountRepository->create($account);
+
+    $account = new \Account(1, 100);
+    $this->expectException(\Exception::class);
+    $accountRepository->create($account);
+
+  }
+
   public function testShouldUpdateAccount(){
     $accountRepository = new \Repository\Account();
-    $id = \App\Models\Account::max('id') + 1;
-
-
-    $id = \App\Models\Account::max('id') + 1;
+    $id = 1;
     $account = new \Account($id, 100);
     $accountRepository->create($account);
 
@@ -42,10 +46,7 @@ class AccountRepositoryTest extends TestCase {
 
   public function testShouldFindAccount(){
     $accountRepository = new \Repository\Account();
-    $id = \App\Models\Account::max('id') + 1;
-
-
-    $id = \App\Models\Account::max('id') + 1;
+    $id = 1;
     $account = new \Account($id, 100);
     $accountRepository->create($account);
 

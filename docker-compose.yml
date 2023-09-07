@@ -4,6 +4,8 @@ services:
   php:
     container_name: php
     build: ./php
+    depends_on: 
+      - database
     volumes:
       - ./src:/app
     environment:
