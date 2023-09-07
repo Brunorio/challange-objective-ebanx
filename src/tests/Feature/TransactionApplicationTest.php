@@ -10,13 +10,13 @@ class TransactionApplicationTest extends TestCase {
     $accountRepository = new \Repository\Account();
 
     $account = new Account(1, 500);
-    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 0);
     $accountRepository->create($account);
     $paymentMethodRepository->create($paymentMethod);
 
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
 
-    $input = new \Input\TransactionPayment(1, 300, 'P');
+    $input = new \Input\TransactionPayment(1, 300, 'O');
     $output = $app->pay($input);
     $this->assertEquals($output->balance, 200);
     
@@ -32,7 +32,7 @@ class TransactionApplicationTest extends TestCase {
     $account = new Account(1, 500);
     $accountRepository->create($account);
 
-    $input = new \Input\TransactionPayment(1, 300, 'D');
+    $input = new \Input\TransactionPayment(1, 300, 'O');
     $this->expectException(\Exception::class);
     $account = $app->pay($input);
   }
@@ -42,10 +42,7 @@ class TransactionApplicationTest extends TestCase {
     $accountRepository = new \Repository\Account();
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
     
-    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
-    $paymentMethodRepository->create($paymentMethod);
-
-    $input = new \Input\TransactionPayment(1, 300, 'D');
+    $input = new \Input\TransactionPayment(1, 300, 'P');
     $this->expectException(\Exception::class);
     $app->pay($input);
   }
@@ -55,13 +52,13 @@ class TransactionApplicationTest extends TestCase {
     $accountRepository = new \Repository\Account();
 
     $account = new Account(1, 500);
-    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 0);
     $accountRepository->create($account);
     $paymentMethodRepository->create($paymentMethod);
 
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
 
-    $input = new \Input\TransactionPayment(1, 800, 'P');
+    $input = new \Input\TransactionPayment(1, 800, 'O');
     $this->expectException(\Exception::class);
     $account = $app->pay($input);
   }
@@ -73,13 +70,13 @@ class TransactionApplicationTest extends TestCase {
 
     $accountSender = new Account(1, 500);
     $accountReceiver = new Account(2, 500);
-    $paymentMethod = new PaymentMethod('P', 'Pix', 10);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 10);
 
     $accountRepository->create($accountSender);
     $accountRepository->create($accountReceiver);
     $paymentMethodRepository->create($paymentMethod);
 
-    $input = new Input\Transfer(1, 2, 100, 'P');
+    $input = new Input\Transfer(1, 2, 100, 'O');
 
     $app->transfer($input);
 
@@ -97,13 +94,13 @@ class TransactionApplicationTest extends TestCase {
 
     $accountSender = new Account(1, 0);
     $accountReceiver = new Account(2, 500);
-    $paymentMethod = new PaymentMethod('P', 'Pix', 10);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 10);
 
     $accountRepository->create($accountSender);
     $accountRepository->create($accountReceiver);
     $paymentMethodRepository->create($paymentMethod);
 
-    $input = new Input\Transfer(1, 2, 100, 'P');
+    $input = new Input\Transfer(1, 2, 100, 'O');
 
     $this->expectException(\Exception::class);
     $app->transfer($input);
@@ -115,12 +112,12 @@ class TransactionApplicationTest extends TestCase {
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
 
     $accountReceiver = new Account(2, 500);
-    $paymentMethod = new PaymentMethod('P', 'Pix', 10);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 10);
 
     $accountRepository->create($accountReceiver);
     $paymentMethodRepository->create($paymentMethod);
 
-    $input = new Input\Transfer(1, 2, 100, 'P');
+    $input = new Input\Transfer(1, 2, 100, 'O');
     
     $this->expectException(\Exception::class);
     $app->transfer($input);

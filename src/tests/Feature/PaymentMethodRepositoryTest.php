@@ -8,7 +8,7 @@ class PaymentMethodRepositoryTest extends TestCase {
 
   public function testShouldCreatePaymentMethod(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
-    $paymentMethod = new \PaymentMethod("D", "Debit", 100);
+    $paymentMethod = new \PaymentMethod("O", "Debit", 100);
     $paymentMethodRepository->create($paymentMethod);
 
     $paymentMethodModel = \App\Models\PaymentMethod::where('id', $paymentMethod->getId())->first();
@@ -29,7 +29,7 @@ class PaymentMethodRepositoryTest extends TestCase {
 
   public function testShouldUpdatePaymentMethod(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
-    $paymentMethod = new \PaymentMethod("C", "Credit", 100);
+    $paymentMethod = new \PaymentMethod("O", "Credit", 100);
     $paymentMethodRepository->create($paymentMethod);
 
     $paymentMethodModel = \App\Models\PaymentMethod::where('id', $paymentMethod->getId())->first();
@@ -40,7 +40,7 @@ class PaymentMethodRepositoryTest extends TestCase {
 
   public function testShouldFindPaymentMethod(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
-    $paymentMethod = new \PaymentMethod("P", "Pix", 100);
+    $paymentMethod = new \PaymentMethod("O", "Pix", 100);
     $paymentMethodRepository->create($paymentMethod);
 
     $paymentMethodModel = \App\Models\PaymentMethod::where('id', $paymentMethod->getId())->first();

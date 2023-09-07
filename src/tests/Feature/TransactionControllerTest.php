@@ -13,14 +13,14 @@ class TransactionControllerTest extends TestCase {
     $account = new Account(1, 500);
     $repository->create($account);
     
-    $paymentMethod = new PaymentMethod('C', 'Credit', 3);
+    $paymentMethod = new PaymentMethod('O', 'Credit', 3);
     $paymentMethodRepository->create($paymentMethod);
 
     $response = $this->postJson('/transacao', 
       [
         'conta_id' => 1, 
         'valor' => 100, 
-        'forma_pagamento' => 'C'
+        'forma_pagamento' => 'O'
       ]
     );
     $response
@@ -38,14 +38,14 @@ class TransactionControllerTest extends TestCase {
     $account = new Account(1, 100);
     $repository->create($account);
     
-    $paymentMethod = new PaymentMethod('C', 'Credit', 3);
+    $paymentMethod = new PaymentMethod('O', 'Credit', 3);
     $paymentMethodRepository->create($paymentMethod);
 
     $response = $this->postJson('/transacao', 
       [
         'conta_id' => 1, 
         'valor' => 100, 
-        'forma_pagamento' => 'C'
+        'forma_pagamento' => 'O'
       ]
     );
     $response->assertStatus(404);
@@ -56,7 +56,7 @@ class TransactionControllerTest extends TestCase {
       [
         'conta_id' => 1, 
         'valor' => 100, 
-        'forma_pagamento' => 'C'
+        'forma_pagamento' => 'O'
       ]
     );
     $response->assertStatus(404);
@@ -72,7 +72,7 @@ class TransactionControllerTest extends TestCase {
     $accountReceiver = new Account(2, 500);
     $repository->create($accountReceiver);
     
-    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 0);
     $paymentMethodRepository->create($paymentMethod);
 
     $response = $this->postJson('/transacao/transferencia', 
@@ -80,7 +80,7 @@ class TransactionControllerTest extends TestCase {
         'conta_origem_id' => 1, 
         'conta_destino_id' => 2, 
         'valor' => 100, 
-        'forma_pagamento' => 'P'
+        'forma_pagamento' => 'O'
       ]
     );
     $response->assertStatus(201);
@@ -102,7 +102,7 @@ class TransactionControllerTest extends TestCase {
     $accountReceiver = new Account(2, 500);
     $repository->create($accountReceiver);
     
-    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethod = new PaymentMethod('O', 'Pix', 0);
     $paymentMethodRepository->create($paymentMethod);
 
     $response = $this->postJson('/transacao/transferencia', 
@@ -110,7 +110,7 @@ class TransactionControllerTest extends TestCase {
         'conta_origem_id' => 1, 
         'conta_destino_id' => 2, 
         'valor' => 100, 
-        'forma_pagamento' => 'P'
+        'forma_pagamento' => 'O'
       ]
     );
     $response->assertStatus(404);
