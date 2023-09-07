@@ -1,28 +1,28 @@
 <?php 
 use PHPUnit\Framework\TestCase;
 
-class TaxTest extends TestCase {
+class PaymentMethodTest extends TestCase {
 
   public function testShouldThrowExceptionWhenIdIsEmpty(){
     $this->expectException(InvalidArgumentException::class);
-    $tax = new Tax("", "Pix", 0);
+    $paymentMethod = new PaymentMethod("", "Pix", 0);
   }
 
   public function testShouldThrowExceptionWhenNameIsEmpty(){
     $this->expectException(InvalidArgumentException::class);
-    $tax = new Tax("P", "", 0);
+    $paymentMethod = new PaymentMethod("P", "", 0);
   }
 
   public function testShouldThrowExceptionWhenTaxValueIsNegative(){
     $this->expectException(InvalidArgumentException::class);
-    $tax = new Tax("P", "Pix", -10);
+    $paymentMethod = new PaymentMethod("P", "Pix", -10);
   }
 
   public function testShouldCalculateAmountWithTax(){
     $value = 100;
-    $tax = new Tax("D", "Debit Card", 3);
+    $paymentMethod = new PaymentMethod("D", "Debit Card", 3);
 
-    $amount = $tax->calculateAmount($value);
+    $amount = $paymentMethod->calculateAmount($value);
     $this->assertEquals($amount, 103);
   }
 
@@ -30,8 +30,8 @@ class TaxTest extends TestCase {
    * @dataProvider truncateAmount
    */
   public function testShouldTruncateWhenAmountIsMoreThenTwoFractionalDigits($value, $expected){ 
-    $tax = new Tax("D", "Debit Card", 5);
-    $amount = $tax->calculateAmount($value);
+    $paymentMethod = new PaymentMethod("D", "Debit Card", 5);
+    $amount = $paymentMethod->calculateAmount($value);
 
     $this->assertEquals($amount, $expected);
   }

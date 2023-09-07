@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tax extends Model {
-    protected $table = "taxes";
+class PaymentMethod extends Model {
+    protected $table = "payment_methods";
     public $timestamps = false;
-    protected $primaryKey = 'tax_id';
+    protected $primaryKey = 'intern_id';
     protected $fillable = ['id', 'name', 'tax'];
 
     public function uniqueIds(): array {

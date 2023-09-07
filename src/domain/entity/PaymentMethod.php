@@ -1,6 +1,6 @@
 <?php 
 
-class Tax {
+class PaymentMethod {
   public function __construct(
     private string $id,
     private string $name,
@@ -18,8 +18,12 @@ class Tax {
       throw new InvalidArgumentException("Tax cannot be negative");
   }
 
+  function calculateTax(float $value): float {
+    return ($this->tax * $value) / 100;
+  }
+
   function calculateAmount(float $value): float {
-    return floor(($value + (($this->tax * $value) / 100)) * 10 ** 2) / 10 ** 2;
+    return floor(($value + $this->calculateTax($value)) * 10 ** 2) / 10 ** 2;
   }
 
   public function getId(){
