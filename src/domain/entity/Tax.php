@@ -21,4 +21,16 @@ class Tax {
   function calculateAmount(float $value): float {
     return floor(($value + (($this->tax * $value) / 100)) * 10 ** 2) / 10 ** 2;
   }
+
+  public function getId(){
+    return $this->id;
+  }
+
+  public function getName() {
+    return $this->name;
+  }
+
+  public function getTax() {
+    return $this->tax;
+  }
 }

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
@@ -24,7 +25,8 @@
         "psr-4": {
             "": "domain/entity",
             "Service\\": "domain/service",
-            "Repository\\": "domain/repository",
+            "Repository\\Interface\\": "domain/repository/interface",
+            "Repository\\": "infrastructure/repository",
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
@@ -36,7 +38,7 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit",
+        "test": "php artisan test",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

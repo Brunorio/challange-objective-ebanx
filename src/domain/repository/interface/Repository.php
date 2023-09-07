@@ -1,8 +1,8 @@
 <?php 
 
-namespace Repository;
+namespace Repository\Interface;
 
-interface RepositoryInterface {
+interface Repository {
   public function create($entity);
   public function update($entity);
   public function find(string $id);

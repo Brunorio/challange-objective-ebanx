@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taxes', function (Blueprint $table) {
+            $table->id("tax_id");
             $table->string("id", 1)->unique();
             $table->string("name")->nullable(false);
             $table->decimal("tax", 8, 2, true);
