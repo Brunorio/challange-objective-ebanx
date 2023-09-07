@@ -24,7 +24,9 @@
     "autoload": {
         "psr-4": {
             "": "domain/entity",
-            "Service\\": "domain/service",
+            "Service\\": "service",
+            "Application\\": "application",
+            "Input\\": "input",
             "Repository\\Interface\\": "domain/repository/interface",
             "Repository\\": "infrastructure/repository",
             "App\\": "app/",

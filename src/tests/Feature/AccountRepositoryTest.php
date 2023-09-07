@@ -23,7 +23,6 @@ class AccountRepositoryTest extends TestCase {
     $account = new \Account(1, 100);
     $this->expectException(\Exception::class);
     $accountRepository->create($account);
-
   }
 
   public function testShouldUpdateAccount(){
@@ -42,7 +41,7 @@ class AccountRepositoryTest extends TestCase {
     $accountModel = \App\Models\Account::find($id);
     $this->assertEquals($accountModel->id, $account->getId());
     $this->assertEquals($accountModel->balance, $account->getBalance());
-  }
+  } 
 
   public function testShouldFindAccount(){
     $accountRepository = new \Repository\Account();
@@ -54,6 +53,12 @@ class AccountRepositoryTest extends TestCase {
     $accountFounded = $accountRepository->find($id);
     $this->assertEquals($accountModel->id, $accountFounded->getId());
     $this->assertEquals($accountModel->balance, $accountFounded->getBalance());
+  }
+
+  public function testShouldExpectedFalseWhenAccountNotFound(){
+    $accountRepository = new \Repository\Account();
+    $this->expectException(\Exception::class);
+    $accountFounded = $accountRepository->find(1000);
   }
  
 

@@ -17,7 +17,8 @@ class Account implements \Repository\Interface\Account {
 
   function find(string $id){
     $accountModel = \App\Models\Account::find($id);
-
-    return (new \Account($accountModel->id, $accountModel->balance));
+    if(!empty($accountModel))
+      return (new \Account($accountModel->id, $accountModel->balance));
+    throw new \Exception("Account not found");
   }
 }

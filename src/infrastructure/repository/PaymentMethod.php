@@ -18,7 +18,8 @@ class PaymentMethod implements \Repository\Interface\PaymentMethod {
 
   function find(string $id){
     $paymentMethodModel = \App\Models\PaymentMethod::where('id', $id)->first();
-
-    return (new \PaymentMethod($paymentMethodModel->id, $paymentMethodModel->name, $paymentMethodModel->tax));
+    if(!empty($paymentMethodModel))
+      return (new \PaymentMethod($paymentMethodModel->id, $paymentMethodModel->name, $paymentMethodModel->tax));
+    throw new \Exception("Payment Method not found");
   }
 }

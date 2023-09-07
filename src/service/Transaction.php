@@ -2,7 +2,7 @@
 
 namespace Service;
 
-class Account {
+class Transaction {
   static function transfer(\Account $accountSender, \Account $accountReceiver, float $value, \PaymentMethod $paymentMethod) {
     $accountSender->decreaseBalance($paymentMethod->calculateAmount($value));
     $accountReceiver->increaseBalance($value);
