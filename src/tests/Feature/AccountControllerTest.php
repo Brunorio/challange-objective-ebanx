@@ -30,12 +30,12 @@ class AccountControllerTest extends TestCase {
       ]);
   }
 
-  public function testShouldExpectedStatusNotFoundWhenIncreaseBalanceAndAccountNotExist(){
+  public function testShouldExpectStatusNotFoundWhenIncreaseBalanceAndAccountNotExist(){
     $response = $this->postJson('/conta', ['conta_id' => 1, 'valor' => 500]);
     $response->assertStatus(404);
   }
 
-  public function testShouldExpectedStatusNotFoundWhenIncreaseBalanceWithNegativeValue(){
+  public function testShouldExpectStatusNotFoundWhenIncreaseBalanceWithNegativeValue(){
     $repository = new Repository\Account();
     $account = new Account(1, 500);
     $repository->create($account);
@@ -52,7 +52,7 @@ class AccountControllerTest extends TestCase {
     $response->assertStatus(200);
   }
 
-  function testShouldExpectedStatusNotFoundWhenAccountNotExist(){
+  function testShouldExpectStatusNotFoundWhenAccountNotExist(){
     $response = $this->get('/conta?id=1');
     $response->assertStatus(404);
   }

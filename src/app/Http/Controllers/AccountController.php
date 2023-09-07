@@ -18,9 +18,7 @@ class AccountController extends Controller {
                 'saldo' => $output->balance
             ], 201);
         } catch(\Exception $e) {
-            return response()->json([
-                'erro' => $e->getMessage(),
-            ], 400);
+            return response('', 404);
         }
     }
 
@@ -41,9 +39,7 @@ class AccountController extends Controller {
                 'saldo' => $output->balance
             ], 201);
         } catch(\Exception $e) {
-            return response()->json([
-                'erro' => $e->getMessage(),
-            ], 404);
+            return response('', 404);
         }
     }
 
@@ -60,9 +56,7 @@ class AccountController extends Controller {
                 'saldo' => $output->balance
             ], 200);
         } catch(\Exception $e) {
-            return response()->json([
-                'erro' => $e->getMessage(),
-            ], 404);
+            return response('', 404);
         }
     }
 }

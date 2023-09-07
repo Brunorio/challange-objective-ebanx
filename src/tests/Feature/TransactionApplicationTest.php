@@ -90,7 +90,7 @@ class TransactionApplicationTest extends TestCase {
     $this->assertEquals($accountReceiver->getBalance(), 600);
   }
 
-  function testShouldExpectedFalseWhenAccountSenderHasInsufficientBalance(){
+  function testShouldExpectFalseWhenAccountSenderHasInsufficientBalance(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
     $accountRepository = new \Repository\Account();
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);
@@ -109,7 +109,7 @@ class TransactionApplicationTest extends TestCase {
     $app->transfer($input);
   }
 
-  function testShouldExpectedFalseWhenAccountSenderNotExists(){
+  function testShouldExpectFalseWhenAccountSenderNotExists(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
     $accountRepository = new \Repository\Account();
     $app = new \Application\Transaction($paymentMethodRepository, $accountRepository);

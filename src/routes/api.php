@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/conta/criacao/bonus', [AccountController::class, 'create']);
 Route::post('/conta', [AccountController::class, 'increaseBalance']);
 Route::get('/conta', [AccountController::class, 'find']);
+
+Route::post('/transacao', [TransactionController::class, 'pay']);

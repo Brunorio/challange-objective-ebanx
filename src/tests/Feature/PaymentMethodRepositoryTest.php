@@ -51,7 +51,7 @@ class PaymentMethodRepositoryTest extends TestCase {
     $this->assertEquals($paymentMethodModel->tax, $paymentMethodFounded->getTax());
   }
 
-  public function testShouldExpectedFalseWhenPaymentMethodIsNotFound(){
+  public function testShouldExpectFalseWhenPaymentMethodIsNotFound(){
     $paymentMethodRepository = new \Repository\PaymentMethod();
     $this->expectException(\Exception::class);
     $paymentMethodFounded = $paymentMethodRepository->find(1000);

@@ -55,7 +55,7 @@ class AccountRepositoryTest extends TestCase {
     $this->assertEquals($accountModel->balance, $accountFounded->getBalance());
   }
 
-  public function testShouldExpectedFalseWhenAccountNotFound(){
+  public function testShouldExpectFalseWhenAccountNotFound(){
     $accountRepository = new \Repository\Account();
     $this->expectException(\Exception::class);
     $accountFounded = $accountRepository->find(1000);
