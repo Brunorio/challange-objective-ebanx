@@ -32,4 +32,20 @@ class TransactionController extends Controller {
             return response('', 404);
         }
     }
+
+    public function transfer(Request $request){
+        try {
+            $data = $request->json()->all() ?? [];
+            $input = new \Input\Transfer(
+                $data['conta_origem_id'] ?? "",
+                $data['conta_destino_id'] ?? "",
+                $data['valor'] ?? 0,
+                $data['forma_pagamento'] ?? ""
+            );
+            $this->app->transfer($input);
+            return response('', 201);
+        } catch(\Exception $e) {
+            return response('', 404);
+        }
+    }
 }

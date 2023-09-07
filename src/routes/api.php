@@ -25,3 +25,4 @@ Route::post('/conta', [AccountController::class, 'increaseBalance']);
 Route::get('/conta', [AccountController::class, 'find']);
 
 Route::post('/transacao', [TransactionController::class, 'pay']);
+Route::post('/transacao/transferencia', [TransactionController::class, 'transfer']);

@@ -62,5 +62,59 @@ class TransactionControllerTest extends TestCase {
     $response->assertStatus(404);
   }
 
+  public function testShouldTransfer(){
+    $repository = new Repository\Account();
+    $paymentMethodRepository = new Repository\PaymentMethod();
+
+    $accountSender = new Account(1, 500);
+    $repository->create($accountSender);
+
+    $accountReceiver = new Account(2, 500);
+    $repository->create($accountReceiver);
+    
+    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethodRepository->create($paymentMethod);
+
+    $response = $this->postJson('/transacao/transferencia', 
+      [
+        'conta_origem_id' => 1, 
+        'conta_destino_id' => 2, 
+        'valor' => 100, 
+        'forma_pagamento' => 'P'
+      ]
+    );
+    $response->assertStatus(201);
+
+    $accountSender = $repository->find(1);
+    $accountReceiver = $repository->find(2);
+
+    $this->assertEquals($accountSender->getBalance(), 400);
+    $this->assertEquals($accountReceiver->getBalance(), 600);
+  }
+
+  public function testShouldExpectNotFoundWhenAccountSenderHasInsufficientBalance(){
+    $repository = new Repository\Account();
+    $paymentMethodRepository = new Repository\PaymentMethod();
+
+    $accountSender = new Account(1, 50);
+    $repository->create($accountSender);
+
+    $accountReceiver = new Account(2, 500);
+    $repository->create($accountReceiver);
+    
+    $paymentMethod = new PaymentMethod('P', 'Pix', 0);
+    $paymentMethodRepository->create($paymentMethod);
+
+    $response = $this->postJson('/transacao/transferencia', 
+      [
+        'conta_origem_id' => 1, 
+        'conta_destino_id' => 2, 
+        'valor' => 100, 
+        'forma_pagamento' => 'P'
+      ]
+    );
+    $response->assertStatus(404);
+  }
+
 
 }
